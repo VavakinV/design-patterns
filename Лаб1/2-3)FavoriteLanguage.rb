@@ -26,3 +26,27 @@ else
 	end
 	puts "Да будет им Ruby!"
 end
+
+# Получение команды Ruby от пользователя
+print "Введите команду Ruby: "
+ruby_command = $stdin.gets.chomp
+
+
+# Выполнение введённой команды Ruby
+begin
+  eval(ruby_command)
+rescue StandardError => e # Обработка исключения
+  puts "Ошибка при выполнении команды Ruby: #{e.message}" 
+end
+
+# Получение команды ОС от пользователя
+print "\nВведите команду операционной системы для выполнения: "
+os_command = $stdin.gets.chomp
+
+# Выполнение введённой команды ОС
+begin
+  os_output = `#{os_command}`.force_encoding('Windows-1251').encode('UTF-8') # Перевод в UTF-8 для корректного отображения символов
+  puts "#{os_output}" 
+rescue StandardError => e # Обработка исключения
+  puts "Ошибка при выполнении команды ОС: #{e.message}"
+end
