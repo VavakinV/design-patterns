@@ -30,8 +30,27 @@ def max_prime_divisor(n)
 end
 
 
+# Произведение всех цифр числа, не делящихся на 5
+def not5_digits_mult(n)
+	# Искомое произведение
+	result = 1
+
+	# С каждой итерацией получаем последнюю цифру
+	# и отбрасываем её целочисленным делением на 10
+	while n >= 1
+		last_digit = n % 10
+		if last_digit % 5 != 0
+			result *= n % 10 
+		end
+		n /= 10
+	end
+
+	return result
+end  
+
+
 # Проверка работы методов
 print "Введите число: "
 number = $stdin.gets.chomp.to_i
 puts "Максимальный простой делитель #{number}: #{max_prime_divisor(number)}"
-
+puts "Произведение цифр в #{number}, не делящихся на 5: #{not5_digits_mult(number)}"
