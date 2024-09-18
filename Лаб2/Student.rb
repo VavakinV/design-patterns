@@ -13,29 +13,21 @@ class Student
 
 	# Геттеры и сеттеры полей
 
-	attr_reader :surname
-	attr_writer :surname
+	attr_accessor :surname
 
-	attr_reader :firstname
-	attr_writer :firstname
+	attr_accessor :firstname
 
-	attr_reader :lastname
-	attr_writer :lastname
+	attr_accessor :lastname
 
-	attr_reader :id
-	attr_writer :id
+	attr_accessor :id
 
-	attr_reader :phone_number
-	attr_writer :phone_number
+	attr_accessor :phone_number
 
-	attr_reader :telegram
-	attr_writer :telegram
+	attr_accessor :telegram
 
-	attr_reader :email
-	attr_writer :email
+	attr_accessor :email
 
-	attr_reader :git
-	attr_writer :git
+	attr_accessor :git
 
 
 	# Вывод информации о студенте
