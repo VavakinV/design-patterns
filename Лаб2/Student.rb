@@ -1,14 +1,14 @@
 class Student
 	# Конструктор класса
-	def initialize(surname, firstname, lastname, id=nil, phone_number=nil, telegram=nil, email=nil, git=nil)
+	def initialize(surname, firstname, lastname, **params)
 		@surname = surname
 		@firstname = firstname
 		@lastname = lastname
-		@id = id
-		@phone_number = phone_number
-		@telegram = telegram
-		@email = email
-		@git = git
+		@id = params[:id]
+		@phone_number = params[:phone_number]
+		@telegram = params[:telegram]
+		@email = params[:email]
+		@git = params[:git]
 	end
 
 	# Геттеры и сеттеры полей
