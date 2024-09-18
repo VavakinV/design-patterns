@@ -13,69 +13,29 @@ class Student
 
 	# Геттеры и сеттеры полей
 
-	def surname
-		@surname
-	end
+	attr_reader :surname
+	attr_writer :surname
 
-	def surname=(val)
-		@surname = val
-	end
+	attr_reader :firstname
+	attr_writer :firstname
 
-	def firstname
-		@firstname
-	end
+	attr_reader :lastname
+	attr_writer :lastname
 
-	def firstname=(val)
-		@firstname = val
-	end
+	attr_reader :id
+	attr_writer :id
 
-	def lastname
-		@lastname
-	end
+	attr_reader :phone_number
+	attr_writer :phone_number
 
-	def lastname=(val)
-		@lastname = val
-	end
+	attr_reader :telegram
+	attr_writer :telegram
 
-	def id
-		@id
-	end
+	attr_reader :email
+	attr_writer :email
 
-	def id=(val)
-		@id = val
-	end
-
-	def phone_number
-		@phone_number
-	end
-
-	def phone_number=(val)
-		@phone_number = val
-	end
-
-	def telegram
-		@telegram
-	end
-
-	def telegram=(val)
-		@telegram = val
-	end
-
-	def email
-		@email
-	end
-
-	def email=(val)
-		@email = val
-	end
-
-	def git
-		@git
-	end
-
-	def git=(val)
-		@git = val
-	end
+	attr_reader :git
+	attr_writer :git
 
 
 	# Вывод информации о студенте
