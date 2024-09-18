@@ -13,22 +13,7 @@ class Student
 
 	# Геттеры и сеттеры полей
 
-	attr_accessor :surname
-
-	attr_accessor :firstname
-
-	attr_accessor :lastname
-
-	attr_accessor :id
-
-	attr_accessor :phone_number
-
-	attr_accessor :telegram
-
-	attr_accessor :email
-
-	attr_accessor :git
-
+	attr_accessor :surname, :firstname, :lastname, :id, :phone_number, :telegram, :email, :git
 
 	# Вывод информации о студенте
 	def print_info
