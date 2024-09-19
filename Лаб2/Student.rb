@@ -5,10 +5,8 @@ class Student
 		self.firstname = firstname
 		self.lastname = lastname
 		self.id = params[:id]
-		self.phone_number = params[:phone_number]
-		self.telegram = params[:telegram]
-		self.email = params[:email]
 		self.git = params[:git]
+		set_contacts(**params)
 	end
 
 	# Геттеры для полей
@@ -41,15 +39,6 @@ class Student
 		end
 	end
 
-	# Сеттер для номера телефона
-	def phone_number=(val)
-		if self.class.valid_phone_num?(val)
-			@phone_number = val
-		else 
-			puts "#{surname} #{firstname} #{lastname}: Некорректный номер телефона"
-		end
-	end
-
 	# Сеттер для ID
 	def id=(val)
 		if self.class.valid_id?(val)
@@ -59,22 +48,14 @@ class Student
 		end
 	end
 
-	# Сеттер для Telegram
-	def telegram=(val)
-		if self.class.valid_telegram?(val)
-			@telegram = val 
-		else
-			puts "#{surname} #{firstname} #{lastname}: Некорректный telegram"
-		end
-	end
-
-	# Сеттер для email
-	def email=(val)
-		if self.class.valid_email?(val)
-			@email = val 
-		else
-			puts "#{surname} #{firstname} #{lastname}: Некорректный email"
-		end
+	# Сеттер контактов
+	# Проверяется валидность переданных данных.
+	# Если они корректны, то соответствующему полю присваивается значение.
+	# Иначе выводится сообщение о некорректном вводе.
+	def set_contacts(**contacts)
+		self.class.valid_email?(contacts[:email]) ? (@email = contacts[:email]) : (puts "#{surname} #{firstname} #{lastname}: Некорректный email")
+		self.class.valid_telegram?(contacts[:telegram]) ? (@telegram = contacts[:telegram]) : (puts "#{surname} #{firstname} #{lastname}: Некорректный telegram")
+		self.class.valid_phone_number?(contacts[:phone_number]) ? (@phone_number = contacts[:phone_number]) : (puts "#{surname} #{firstname} #{lastname}: Некорректный phone_number")
 	end
 
 	# Сеттер для Git
@@ -87,7 +68,7 @@ class Student
 	end
 
 	# Метод валидации номера телефона
-	def self.valid_phone_num?(str)
+	def self.valid_phone_number?(str)
 		str.nil? || str.match?(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)
 	end
 
