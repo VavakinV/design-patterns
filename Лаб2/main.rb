@@ -9,3 +9,6 @@ ivan.print_info
 nikita.print_info
 masha.print_info
 sergey.print_info
+
+puts "validate для nikita: #{nikita.validate}"
+puts "validate для masha: #{masha.validate}"
