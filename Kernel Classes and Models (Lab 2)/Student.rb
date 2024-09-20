@@ -63,7 +63,7 @@ class Student
 		if self.class.valid_git?(val)
 			@git = val 
 		else
-			puts "#{surname} #{firstname} #{lastname}: Некорректный git"
+			raise ArgumentError, "Некорректный git"
 		end
 	end
 
@@ -137,9 +137,9 @@ class Student
 	# Получение доступного средства связи
 	def contact_info
 		if phone_number
-		  "[Номер телефона] #{phone_number}"
+		  "[phone_number] #{phone_number}"
 		elsif telegram
-		  "[Telegram] #{telegram}"
+		  "[telegram] #{telegram}"
 		elsif email
 		  "[email] #{email}"
 		else
@@ -152,3 +152,85 @@ class Student
 		"#{initials}; Git: #{git_info}; Связь: #{contact_info}"
 	end
 end
+
+class Student_short
+	attr_reader :id, :initials, :git, :contacts
+
+	# Конструктор принимает хэш с либо полем student:, либо двумя полями id: и contacts:
+	def initialize(params)
+		if params[:student]
+			# Если передан объект класса Student
+			student = params[:student]
+			@id = student.id
+			@initials = student.initials
+			@git = student.git
+			@contacts = student.contact_info
+		elsif params[:id] && params[:contacts]
+			# Если передан id и строка contacts
+			@id = params[:id]
+			parse_info(params[:contacts])
+		else
+			raise ArgumentError, "Неверные параметры конструктора"
+		end
+	end
+
+	private
+
+	# Сеттер для Git
+	def git=(val)
+		if Student.valid_git?(val)
+			@git = val 
+		else
+			raise ArgumentError, "Некорректный git"
+		end
+	end
+
+	def contacts=(val)
+		if val[:phone_number]
+			if Student.valid_phone_number?(val[:phone_number])
+				@contacts = "[phone_number] #{val[:phone_number]}"
+			else
+				raise ArgumentError, "Некорректный номер телефона"
+			end
+		elsif val[:telegram]
+			if Student.valid_phone_telegram?(val[:telegram])
+				@contacts = "[telegram] #{val[:telegram]}"
+			else
+				raise ArgumentError, "Некорректный Telegram"
+			end
+		elsif val[:email]
+			if Student.valid_phone_email?(val[:email])
+				@contacts = "[email] #{val[:email]}"
+			else
+				raise ArgumentError, "Некорректный email"
+			end
+		else
+			raise ArgumentError, "Некорректные данные связи: #{val}"
+		end
+	end
+
+	# Метод для парсинга строки, содержащей инициалы, гит и контакты
+	def parse_info(info_str)
+		# Разбиваем строку на части
+		parts = info_str.split(';').map(&:strip)
+
+		# Инициалы находятся в первой части
+		@initials = parts[0]
+
+		# Гит находится во второй части (если его нет, то "Git отсутствует")
+		self.git = parts[1].start_with?("Git") ? parts[1].split(': ').last : nil
+
+		# Контактная информация в третьей части (формат "Связь: [<тип>] <данные>")
+		if parts[2].start_with?("Связь:")
+			contact_type = parts[2].match(/\[(.*?)\]/)[1]   # Извлекаем тип контакта, например, phone_number, telegram, email
+			contact_data = parts[2].split('] ')[1]          # Извлекаем данные контакта
+
+			# Преобразуем тип контакта в хэш и передаем в сеттер
+			self.contacts = {contact_type.to_sym => contact_data}
+		else
+			raise ArgumentError, "Неверный формат контактов"
+		end
+	end
+end
+
+

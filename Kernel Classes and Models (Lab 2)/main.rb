@@ -11,3 +11,16 @@ masha.print_info
 sergey.print_info
 
 puts "get_info для ivan: #{ivan.get_info}"
+
+sereja = Student_short.new(student: sergey)
+
+puts "\nStudent_short 1:"
+puts sereja.initials
+puts sereja.contacts
+
+maxim = Student_short.new(id: 10, contacts: "Серый М.А.; Git: https://github.com/max; Связь: [phone_number] +79182253564")
+
+puts "\nStudent_short 2:"
+puts maxim.initials
+puts maxim.git
+puts maxim.contacts
