@@ -44,7 +44,7 @@ class Student
 		if self.class.valid_id?(val)
 			@id = val 
 		else
-			puts "#{surname} #{firstname} #{lastname}: Некорректный ID"
+			raise ArgumentError, "Некорректный ID"
 		end
 	end
 
@@ -53,9 +53,9 @@ class Student
 	# Если они корректны, то соответствующему полю присваивается значение.
 	# Иначе выводится сообщение о некорректном вводе.
 	def set_contacts(**contacts)
-		self.class.valid_email?(contacts[:email]) ? (@email = contacts[:email]) : (puts "#{surname} #{firstname} #{lastname}: Некорректный email")
-		self.class.valid_telegram?(contacts[:telegram]) ? (@telegram = contacts[:telegram]) : (puts "#{surname} #{firstname} #{lastname}: Некорректный telegram")
-		self.class.valid_phone_number?(contacts[:phone_number]) ? (@phone_number = contacts[:phone_number]) : (puts "#{surname} #{firstname} #{lastname}: Некорректный phone_number")
+		self.class.valid_email?(contacts[:email]) ? (@email = contacts[:email]) : (raise ArgumentError, "Некорректный e-mail")
+		self.class.valid_telegram?(contacts[:telegram]) ? (@telegram = contacts[:telegram]) : (raise ArgumentError, "Некорректный Telegram")
+		self.class.valid_phone_number?(contacts[:phone_number]) ? (@phone_number = contacts[:phone_number]) : (raise ArgumentError, "Некорректный номер телефона")
 	end
 
 	# Сеттер для Git
@@ -89,7 +89,7 @@ class Student
 
 	# Метод валидации email
 	def self.valid_email?(str)
-		str.nil? || str.match?(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)
+		str.nil? || str.match?(/^[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/)
 	end
 
 	# Метод валидации Git
@@ -99,7 +99,14 @@ class Student
 
 	# Вывод информации о студенте
 	def print_info
-		puts "------------------\n" + "Студент: #{@surname} #{@firstname} #{@lastname}" + (@id ? "\nID: #{@id}" : "") + (@phone_number ? "\nНомер телефона: #{@phone_number}" : "") + (@telegram ? "\nTelegram: #{@telegram}" : "") + (@email ? "\ne-mail: #{@email}" : "") + (@git ? "\nGit: #{@git}" : "") + "\n------------------"
+		puts "------------------"
+		puts "Студент: #{@surname} #{@firstname} #{@lastname}"
+		print (@id ? "\nID: #{@id}" : "")
+		print (@phone_number ? "\nНомер телефона: #{@phone_number}" : "") 
+		print (@telegram ? "\nTelegram: #{@telegram}" : "") 
+		print (@email ? "\ne-mail: #{@email}" : "") 
+		print (@git ? "\nGit: #{@git}" : "") 
+		puts"\n------------------"
 	end
 
 	# Проверка наличия гита и контактов
