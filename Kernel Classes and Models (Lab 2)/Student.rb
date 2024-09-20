@@ -184,7 +184,7 @@ class Student_short < Person
 
 	# Сеттер для Git
 	def git=(val)
-		if Student.valid_git?(val)
+		if self.class.valid_git?(val)
 			@git = val 
 		else
 			raise ArgumentError, "Некорректный git"
@@ -193,19 +193,19 @@ class Student_short < Person
 
 	def contacts=(val)
 		if val[:phone_number]
-			if Student.valid_phone_number?(val[:phone_number])
+			if self.class.valid_phone_number?(val[:phone_number])
 				@contacts = "[phone_number] #{val[:phone_number]}"
 			else
 				raise ArgumentError, "Некорректный номер телефона"
 			end
 		elsif val[:telegram]
-			if Student.valid_phone_telegram?(val[:telegram])
+			if self.class.valid_phone_telegram?(val[:telegram])
 				@contacts = "[telegram] #{val[:telegram]}"
 			else
 				raise ArgumentError, "Некорректный Telegram"
 			end
 		elsif val[:email]
-			if Student.valid_phone_email?(val[:email])
+			if self.class.valid_phone_email?(val[:email])
 				@contacts = "[email] #{val[:email]}"
 			else
 				raise ArgumentError, "Некорректный email"
