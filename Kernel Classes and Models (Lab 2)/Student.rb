@@ -79,7 +79,7 @@ class Student
 
 	# Метод валидации ID
 	def self.valid_id?(str)
-		str.nil? || str.class == Integer ? true : str.match?(/^(\d+)$/) ? true : false
+		str.nil? || str.class == Integer
 	end
 
 	# Метод валидации Telegram
@@ -100,7 +100,7 @@ class Student
 	# Вывод информации о студенте
 	def print_info
 		puts "------------------"
-		puts "Студент: #{@surname} #{@firstname} #{@lastname}"
+		print "Студент: #{@surname} #{@firstname} #{@lastname}"
 		print (@id ? "\nID: #{@id}" : "")
 		print (@phone_number ? "\nНомер телефона: #{@phone_number}" : "") 
 		print (@telegram ? "\nTelegram: #{@telegram}" : "") 
