@@ -123,4 +123,32 @@ class Student
 	def has_contacts?
 		!@phone_number.nil? || !@telegram.nil? || !@email.nil?
 	end
+
+	# Получение фамилию и инициалов
+	def initials
+		"#{surname} #{firstname[0]}.#{lastname[0]}."
+	end
+
+	# Получение гита
+	def git_info
+		git ? "#{git}" : "Git отсутствует"
+	end
+
+	# Получение доступного средства связи
+	def contact_info
+		if phone_number
+		  "[Номер телефона] #{phone_number}"
+		elsif telegram
+		  "[Telegram] #{telegram}"
+		elsif email
+		  "[email] #{email}"
+		else
+		  "Контакты отсутствуют"
+		end
+	end
+
+	# Вывод краткой информации о студенте в одной строке
+	def get_info
+		"#{initials}; Git: #{git_info}; Связь: #{contact_info}"
+	end
 end

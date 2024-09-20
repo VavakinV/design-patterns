@@ -10,9 +10,4 @@ nikita.print_info
 masha.print_info
 sergey.print_info
 
-puts "validate для nikita: #{nikita.validate}"
-puts "validate для masha: #{masha.validate}"
-
-puts "\nОбновлённые данные после применения set_contacts:"
-sergey.set_contacts(phone_number: nil, telegram:"t.me/sereja")
-sergey.print_info
+puts "get_info для ivan: #{ivan.get_info}"
