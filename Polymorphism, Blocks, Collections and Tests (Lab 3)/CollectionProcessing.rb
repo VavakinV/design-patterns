@@ -22,9 +22,15 @@ def local_min?(array, index)
 	is_left_min && is_right_min
 end
 
+# Циклический сдвиг влево на 1
+def shift_left(array)
+	return if array.size == 0
+	array<<array.delete_at(0)
+end	
+
 
 # Ввод номера метода с клавиатуры
-puts "Выберите метод:\n1 - Проверка на глобальный максимум\n2 - Проверка на локальный минимум"
+puts "Выберите метод:\n1 - Проверка на глобальный максимум\n2 - Проверка на локальный минимум\n3 - Циклический сдвиг влево на 1"
 print "Введите номер: "
 method_num = gets.chomp.to_i
 
@@ -52,4 +58,10 @@ when 2
 	else
   		puts "Элемент по индексу #{i} не является локальным минимумом."
 	end
+when 3
+	puts "Введите элементы массива, разделенные пробелами:"
+	input = gets.chomp
+	array = input.split.map{|x| x.to_i}
+	puts "Массив после сдвига:"
+	puts shift_left(array)
 end
