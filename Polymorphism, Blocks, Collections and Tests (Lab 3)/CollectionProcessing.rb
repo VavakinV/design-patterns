@@ -28,9 +28,18 @@ def shift_left(array)
 	array<<array.delete_at(0)
 end	
 
+# Вывод сначала элементов с четными индексами, затем - с нечетными
+def print_even_and_odd(array)
+	even_indexes = (0..((array.size-1)/2)).map{|x| x*2}
+	odd_indexes = even_indexes.map{|x| x+1}
+	print "На четных индексах: "
+	array.values_at(*even_indexes).map{|x| print "#{x} "} # Вывод через пробел элементов, находящихся на четных индексах
+	print "\nНа нечетных индексах: "
+	array.values_at(*odd_indexes).map{|x| print "#{x} "} # Вывод через пробел элементов, находящихся на нечетных индексах
+end	
 
 # Ввод номера метода с клавиатуры
-puts "Выберите метод:\n1 - Проверка на глобальный максимум\n2 - Проверка на локальный минимум\n3 - Циклический сдвиг влево на 1"
+puts "Выберите метод:\n1 - Проверка на глобальный максимум\n2 - Проверка на локальный минимум\n3 - Циклический сдвиг влево на 1\n4 - Вывод элементов сначала с четными индексами, затем - с нечетными"
 print "Введите номер: "
 method_num = gets.chomp.to_i
 
@@ -64,4 +73,9 @@ when 3
 	array = input.split.map{|x| x.to_i}
 	puts "Массив после сдвига:"
 	puts shift_left(array)
+when 4
+	puts "Введите элементы массива, разделенные пробелами:"
+	input = gets.chomp
+	array = input.split.map{|x| x.to_i}
+	print_even_and_odd(array)
 end
