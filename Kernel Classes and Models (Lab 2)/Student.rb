@@ -36,13 +36,13 @@ end
 
 class Student < Person
 	# Конструктор класса
-	def initialize(surname, firstname, lastname, **params)
+	def initialize(surname:, firstname:, lastname:, id:nil, git:nil, email:nil, telegram:nil, phone_number:nil)
 		self.surname = surname
 		self.firstname = firstname
 		self.lastname = lastname
-		self.id = params[:id]
-		self.git = params[:git]
-		set_contacts(**params)
+		self.id = id
+		self.git = git
+		set_contacts(email:email, telegram:telegram, phone_number:phone_number)
 	end
 
 	# Геттеры для полей
@@ -103,16 +103,17 @@ class Student < Person
 		end
 	end
 
-	# Вывод информации о студенте
-	def print_info
-		puts "------------------"
-		print "Студент: #{@surname} #{@firstname} #{@lastname}"
-		print (@id ? "\nID: #{@id}" : "")
-		print (@phone_number ? "\nНомер телефона: #{@phone_number}" : "") 
-		print (@telegram ? "\nTelegram: #{@telegram}" : "") 
-		print (@email ? "\ne-mail: #{@email}" : "") 
-		print (@git ? "\nGit: #{@git}" : "") 
-		puts"\n------------------"
+	# Переопределение to_s
+	# Содержит ФИО и необязательные поля при их наличии
+	def to_s
+		"------------------\n"+\
+		"Студент: #{@surname} #{@firstname} #{@lastname}"+\
+		(@id ? "\nID: #{@id}" : "")+\
+		(@phone_number ? "\nНомер телефона: #{@phone_number}" : "")+\
+		(@telegram ? "\nTelegram: #{@telegram}" : "")+\
+		(@email ? "\ne-mail: #{@email}" : "")+\
+		(@git ? "\nGit: #{@git}" : "")+\
+		"\n------------------"
 	end
 
 	# Проверка наличия гита и контактов
@@ -163,18 +164,18 @@ class Student_short < Person
 	attr_reader :initials, :contacts
 
 	# Конструктор принимает хэш с либо полем student:, либо двумя полями id: и contacts:
-	def initialize(params)
-		if params[:student]
+	def initialize(student:nil, id:nil, contacts:nil)
+		if student
 			# Если передан объект класса Student
-			student = params[:student]
+			student = student
 			@id = student.id
 			@initials = student.initials
 			@git = student.git
 			@contacts = student.contact_info
-		elsif params[:id] && params[:contacts]
+		elsif id && contacts
 			# Если передан id и строка contacts
-			@id = params[:id]
-			parse_info(params[:contacts])
+			@id = id
+			parse_info(contacts)
 		else
 			raise ArgumentError, "Неверные параметры конструктора"
 		end
