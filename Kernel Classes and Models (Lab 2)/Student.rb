@@ -193,7 +193,9 @@ class Student_short < Person
 	end
 
 	def contacts=(val)
-		if val[:phone_number]
+		if val.nil?
+			@contacts = nil
+		elsif val[:phone_number]
 			if self.class.valid_phone_number?(val[:phone_number])
 				@contacts = "[phone_number] #{val[:phone_number]}"
 			else
@@ -222,13 +224,19 @@ class Student_short < Person
 		parts = info_str.split(';').map(&:strip)
 
 		# Инициалы находятся в первой части
+		# Если их нет, выбрасывается исключение
+		if parts[0].nil?
+			raise ArgumentError, "Отсутствуют инициалы"
+		end
 		@initials = parts[0]
 
 		# Гит находится во второй части (если его нет, то "Git отсутствует")
-		self.git = parts[1].start_with?("Git") ? parts[1].split(': ').last : nil
+		self.git = parts[1].nil? ? nil : parts[1].start_with?("Git") ? parts[1].split(': ').last : nil
 
 		# Контактная информация в третьей части (формат "Связь: [<тип>] <данные>")
-		if parts[2].start_with?("Связь:")
+		if parts[2].nil?
+			self.contacts = nil
+		elsif parts[2].start_with?("Связь:")
 			contact_type = parts[2].match(/\[(.*?)\]/)[1]   # Извлекаем тип контакта, например, phone_number, telegram, email
 			contact_data = parts[2].split('] ')[1]          # Извлекаем данные контакта
 

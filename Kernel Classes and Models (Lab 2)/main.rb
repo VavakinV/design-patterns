@@ -10,7 +10,7 @@ puts nikita
 puts masha
 puts sergey
 
-puts "get_info для ivan: #{ivan.get_info}"
+puts "\nget_info для ivan: #{ivan.get_info}"
 
 sereja = Student_short.new(student: sergey)
 
@@ -24,3 +24,7 @@ puts "\nStudent_short 2:"
 puts maxim.initials
 puts maxim.git
 puts maxim.contacts
+
+oleg = Student_short.new(id: 20, contacts: "Красный О.О.;;")
+puts "\nStudent_short 3:"
+puts oleg.initials
