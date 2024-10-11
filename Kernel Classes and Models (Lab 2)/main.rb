@@ -29,3 +29,6 @@ puts maxim.contacts
 oleg = Student_short.new(id: 20, contacts: "Красный О.О.;;")
 puts "\nStudent_short 3:"
 puts oleg.initials
+
+puts "\nvalidate для ivan: #{ivan.validate}"
+puts "\nvalidate для sereja: #{sereja.validate}"

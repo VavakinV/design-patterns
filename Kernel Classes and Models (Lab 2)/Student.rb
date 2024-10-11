@@ -81,17 +81,7 @@ class Student < Person
 		(@git ? "\nGit: #{@git}" : "")+\
 		"\n------------------"
 	end
-
-	# Проверка наличия гита и контактов
-	def validate
-		has_git? && has_contacts?
-	end	
-
-	# Проверка наличия гита
-	def has_git?
-		!@git.nil?
-	end
-
+	
 	# Проверка наличия хотя бы одного из контактов
 	def has_contacts?
 		!@phone_number.nil? || !@telegram.nil? || !@email.nil?

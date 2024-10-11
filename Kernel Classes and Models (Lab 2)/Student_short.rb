@@ -86,4 +86,9 @@ class Student_short < Person
 			raise ArgumentError, "Неверный формат контактов"
 		end
 	end
+
+	# Проверка наличия хотя бы одного из контактов
+	def has_contacts?
+		!@contacts.nil?
+	end
 end
