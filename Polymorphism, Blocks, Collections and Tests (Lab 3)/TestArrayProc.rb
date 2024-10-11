@@ -6,3 +6,4 @@ array_proc = ArrayProc.new(array)
 puts "Исходный массив: #{array}"
 puts "(count) Количество чётных чисел: #{array_proc.count{|x| x % 2 == 0}}"
 puts "(count) Количество чисел, квадрат которых меньше 50: #{array_proc.count{|x| x**2 < 50}}"
+puts "(group_by) Группировка по остатку от деления на 4: #{array_proc.group_by{|x| x % 4}}"
