@@ -35,4 +35,17 @@ class ArrayProc
 
 		result
 	end
+
+	# Разделение массива на два по выполнению условия в блоке
+	def partition
+		true_list = []
+		false_list = []
+
+		# Перебор элементов массива
+		@array.each do |element|
+			yield(element) ? true_list.append(element) : false_list.append(element)
+		end
+
+		return [true_list, false_list]
+	end
 end
