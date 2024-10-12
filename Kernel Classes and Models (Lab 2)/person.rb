@@ -1,6 +1,14 @@
 class Person
 	attr_reader :id, :git
 
+	def contacts
+		raise NotImplementedError, "Метод не реализован в классе Person"
+	end
+
+	def intials
+		raise NotImplementedError, "Метод не реализован в классе Person"
+	end
+
 	# Проверка наличия гита и контактов
 	def validate
 		has_git? && has_contacts?

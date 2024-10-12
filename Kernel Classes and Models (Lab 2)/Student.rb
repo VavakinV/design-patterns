@@ -1,4 +1,4 @@
-require "./Person.rb"
+require "./person.rb"
 
 class Student < Person
 	# Конструктор класса
@@ -12,7 +12,7 @@ class Student < Person
 	end
 
 	# Геттеры для полей
-	attr_reader :surname, :firstname, :lastname, :phone_number, :telegram, :email
+	attr_reader :surname, :firstname, :lastname, :phone_number, :telegram, :email, :git
 
 	# Сеттер для фамилии
 	def surname=(val)
@@ -92,13 +92,8 @@ class Student < Person
 		"#{surname} #{firstname[0]}.#{lastname[0]}."
 	end
 
-	# Получение гита
-	def git_info
-		git ? "#{git}" : "Git отсутствует"
-	end
-
 	# Получение доступного средства связи
-	def contact_info
+	def contacts
 		if phone_number
 		  "[phone_number] #{phone_number}"
 		elsif telegram
@@ -106,12 +101,12 @@ class Student < Person
 		elsif email
 		  "[email] #{email}"
 		else
-		  "Контакты отсутствуют"
+		  nil
 		end
 	end
 
 	# Вывод краткой информации о студенте в одной строке
 	def get_info
-		"#{initials}; Git: #{git_info}; Связь: #{contact_info}"
+		"#{get_initials}; Git: #{git}; Связь: #{contacts}"
 	end
 end
