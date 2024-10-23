@@ -80,4 +80,20 @@ class ArrayProc
 
 		min_element
 	end
+
+	# Преобразование И фильтрация элементов массива
+	def filter_map
+		result = []
+
+	    # Перебор элементов массива
+	    @array.each do |element|
+			# Применение блока к каждому элементу
+			value = yield(element)
+
+			# Если результат не nil или false, то он добавляется к массиву
+			result << value if value
+		end
+
+	    result
+	end
 end

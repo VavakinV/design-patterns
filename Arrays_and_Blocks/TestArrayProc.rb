@@ -11,3 +11,4 @@ puts "(partition) Разделение на чётные/нечётные: #{arr
 puts "(take_while) Элементы меньше 7: #{array_proc.take_while{|x| x < 7}}"
 puts "(min) Минимальный элемент: #{array_proc.min}"
 puts "(min) Максимальный элемент: #{array_proc.min{|x, y| -x <=> -y}}"
+puts "(filter_map) Удвоенные нечётные элементы: #{array_proc.filter_map{|x| x*2 if x.odd?}}"
