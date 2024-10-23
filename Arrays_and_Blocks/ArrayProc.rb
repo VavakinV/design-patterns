@@ -48,4 +48,17 @@ class ArrayProc
 
 		return [true_list, false_list]
 	end
+
+	# Получение элементов, пока блок возвращает true
+	def take_while
+		result = []
+
+		# Перебор элементов массива
+		@array.each do |element|
+			break unless yield(element) # Выход из цикла, если условие блока не выполняется
+			result << element # Иначе к результату добавляется текущий элемент
+		end
+
+		result
+	end
 end
