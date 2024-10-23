@@ -61,4 +61,23 @@ class ArrayProc
 
 		result
 	end
+
+	# Минимальный элемент
+	def min
+		return nil if @array.empty? # Если массив пуст, то nil
+
+		min_element = @array.first # Минимальный элемент по умолчанию первый
+
+		if block_given? # Если передан блок, то сравнение по нему
+			@array.each do |element|
+				min_element = element if yield(element, min_element) < 0
+			end
+		else # Если блок не передан, то ищется минимальный элемент по значению
+			@array.each do |element|
+				min_element = element if element < min_element
+			end
+		end
+
+		min_element
+	end
 end
