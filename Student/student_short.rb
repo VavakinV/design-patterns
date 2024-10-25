@@ -11,7 +11,7 @@ class Student_short < Person
 			@id = student.id
 			@initials = student.initials
 			@git = student.git
-			@contacts = student.contact_info
+			@contacts = student.contacts
 		elsif id && contacts
 			# Если передан id и строка contacts
 			@id = id

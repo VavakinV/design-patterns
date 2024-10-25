@@ -55,5 +55,10 @@ class Person
 	def self.valid_git?(str)
 		str.nil? || str.match?(/^(?:https:\/\/github\.com\/)?[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/)
 	end
+
+	# Метод валидации даты рождения
+	def self.valid_date_of_birth?(str)
+		str.nil? || str.match?(/^\A(\d{2}\.\d{2}\.(\d{4}))\z$/)
+	end
 end
 

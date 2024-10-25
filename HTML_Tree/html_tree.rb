@@ -1,6 +1,8 @@
 require "./tag.rb"
 
 class HtmlTree
+  include Enumerable
+
   # Доступные теги и атрибуты
   ALLOWED_TAGS = %w[html head body div p h1 h2 ul li a span].freeze
   ALLOWED_ATTRIBUTES = %w[class id href src].freeze
