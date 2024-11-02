@@ -10,16 +10,12 @@ class Student_binary_tree
 		@root = nil
 	end
 
-	# Добавление нового студента к дереву
-	def insert(student)
-		unless student.is_a?(Student)
-			raise ArgumentError, "Добавляемый узел не является Student"
-		end
-
+	# Добавление нового элемента к дереву
+	def insert(element)
 		if @root.nil?
-			@root = Tree_node.new(student)
+			@root = Tree_node.new(element)
 		else
-			insert_node(@root, student)
+			insert_node(@root, element)
 		end
 	end
 
@@ -39,19 +35,19 @@ class Student_binary_tree
 		dfs(node.right, &block)
 	end
 
-	# Добавление нового студента к указанному узлу
-	def insert_node(node, student)
-		if student < node.student
+	# Добавление нового элемента к указанному узлу
+	def insert_node(node, element)
+		if element < node.element
 			if node.left.nil?
-				node.left = Tree_node.new(student)
+				node.left = Tree_node.new(element)
 			else
-				insert_node(node.left, student)
+				insert_node(node.left, element)
 			end
 		else
 			if node.right.nil?
-				node.right = Tree_node.new(student)
+				node.right = Tree_node.new(element)
 			else
-				insert_node(node.right, student)
+				insert_node(node.right, element)
 			end
 		end
 	end

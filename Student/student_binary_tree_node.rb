@@ -1,8 +1,8 @@
 class Tree_node
-	attr_accessor :student, :left, :right
+	attr_accessor :element, :left, :right
 
-	def initialize(student)
-		@student = student
+	def initialize(element)
+		@element = element
 		@left = nil
 		@right = nil
 	end

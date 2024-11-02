@@ -126,25 +126,9 @@ class Student < Person
 	# Переопределение <=> по дате рождения
 	def <=>(other)
 		return nil unless other.is_a?(Student)
-		compare_dates(date_of_birth, other.date_of_birth)
-	end
+		return 1 if (date_of_birth.nil? && other.date_of_birth.nil?) || (date_of_birth.nil?)
+		return -1 if other.date_of_birth.nil?
 
-	private
-
-	# Метод для сравнения двух строковых дат (значения nil считаются больше по умолчанию)
-	def compare_dates(date1, date2)
-		return 1 if (date1.nil? && date2.nil?) || (date1.nil?)
-		return -1 if date2.nil?
-
-		day1, month1, year1 = date1.split('.').map(&:to_i)
-		day2, month2, year2 = date2.split('.').map(&:to_i)
-
-		if year1 != year2
-			year1 <=> year2
-		elsif month1 != month2
-			month1 <=> month2
-		else
-			day1 <=> day2
-		end
+		date_of_birth <=> other.date_of_birth
 	end
 end

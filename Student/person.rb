@@ -1,3 +1,5 @@
+require 'date'
+
 class Person
 	attr_reader :id, :git
 
@@ -58,7 +60,7 @@ class Person
 
 	# Метод валидации даты рождения
 	def self.valid_date_of_birth?(str)
-		str.nil? || str.match?(/^\A(\d{2}\.\d{2}\.(\d{4}))\z$/)
+		str.nil? || str.is_a?(Date)
 	end
 end
 
