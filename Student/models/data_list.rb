@@ -1,4 +1,4 @@
-class Data_List
+class Data_list
 
     def initialize(data)
         self.data = data

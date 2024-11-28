@@ -1,4 +1,4 @@
-class Data_Table
+class Data_table
 
     def initialize(data)
         self.data = data
