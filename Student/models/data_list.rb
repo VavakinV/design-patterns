@@ -20,13 +20,31 @@ class Data_list
 
     # Получение массива наименований атрибутов
     def get_names
-        raise NotImplementedError, 'Метод не реализован в данном классе'
+        column_names = ['№'] # нулевой столбец - порядковый номер
+        base_names.each do |name| 
+            column_names << name
+        end
+        column_names
     end
 
     # Получение объекта класса Data_Table
     def get_data
-        raise NotImplementedError, 'Метод не реализован в данном классе'
+        data_table = [get_names]  # Первая строка с названиями атрибутов
+        data.each_with_index do |item, index|
+            data_table << build_row(item, index)
+        end
+        Data_table.new(data_table)
     end
+
+    # Абстрактный метод получения имен атрибутов
+    def base_names
+        raise NotImplementedError, 'Метод не реализован в данном классе'
+    end    
+
+    # Абстрактный метод построения строки данных
+    def build_row(item, index)
+        raise NotImplementedError, 'Метод не реализован в данном классе'
+    end    
 
     private
 

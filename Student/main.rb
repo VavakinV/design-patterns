@@ -50,5 +50,5 @@ student_short_list = Data_list_student_short.new([sereja, maxim , oleg])
 table = student_short_list.get_data
 
 (0..3).each do |index|
-    puts "#{table.get_element(index, 1)}, #{table.get_element(index, 2)}, #{table.get_element(index, 3)}"   
+    puts "#{table.get_element(index, 0)}, #{table.get_element(index, 1)}, #{table.get_element(index, 2)}, #{table.get_element(index, 3)}"   
 end
