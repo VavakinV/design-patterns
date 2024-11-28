@@ -1,9 +1,23 @@
 class Data_Table
-    
+
     def initialize(data)
         self.data = data
     end
 
+    # Получение элемента по индексу строки и столбца
+    def get_element(row_index, column_index)
+        self.data[row_index][column_index]
+    end
+
+    # Количество строк
+    def row_count
+        self.data.size
+    end
+
+    # Количество столбцов
+    def column_count
+        self.data.empty ? 0 : self.data[0].size
+    end
 
     private
 
