@@ -36,21 +36,6 @@ class Data_list
         Data_table.new(data_table)
     end
 
-    # Абстрактный метод получения имен атрибутов
-    def base_names
-        raise NotImplementedError, 'Метод не реализован в данном классе'
-    end    
-
-    # Абстрактный метод построения строки данных
-    def build_row(item, index)
-        raise NotImplementedError, 'Метод не реализован в данном классе'
-    end    
-
-    private
-
-    attr_reader :data
-    attr_accessor :selected
-
     # Сеттер для поля
     def data=(data)
         # Параметр должен быть массивом
@@ -60,4 +45,19 @@ class Data_list
 
         @data = data
     end
+
+    protected
+    
+    attr_reader :data
+    attr_accessor :selected
+
+    # Абстрактный метод получения имен атрибутов
+    def base_names
+        raise NotImplementedError, 'Метод не реализован в данном классе'
+    end    
+
+    # Абстрактный метод построения строки данных
+    def build_row(item, index)
+        raise NotImplementedError, 'Метод не реализован в данном классе'
+    end    
 end
