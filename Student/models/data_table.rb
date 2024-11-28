@@ -27,7 +27,7 @@ class Data_Table
     def data=(data)
         # Параметр должен быть двумерным массивом
         unless data.is_a?(Array) && data.all? { |row| row.is_a?(Array) }
-            raise ArgumentError, 'Data must be a two-dimensional array'
+            raise ArgumentError, 'Переданный параметр должен быть двумерным массивом'
         end
 
         @data = data
