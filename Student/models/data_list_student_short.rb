@@ -3,6 +3,8 @@ require "./models/data_table.rb"
 require "./student_short.rb"
 
 class Data_list_student_short < Data_list
+    private
+
     # Переопределяем метод для получения базовых наименований атрибутов
     def base_names
         ["name", "git", "contacts"]
