@@ -58,7 +58,7 @@ students_list = Students_list_JSON.new('students.json')
 students_list.read
 students_list.sort_by_initials
 
-puts "Отсортированные студенты в students_list, начиная со второго:"
+puts "Отсортированные студенты в students_list (первые 2):"
 data_list = students_list.get_k_n_student_short_list(1, 2)
 data = data_list.get_data
 
@@ -72,7 +72,7 @@ puts "Добавление нового студента:"
 students_list.add_student(test_student)
 students_list.sort_by_initials
 
-data_list = students_list.get_k_n_student_short_list(0, students_list.get_student_short_count)
+data_list = students_list.get_k_n_student_short_list(1, students_list.get_student_short_count)
 data = data_list.get_data
 
 (0..data.row_count - 1).each do |index|
@@ -81,7 +81,7 @@ end
 
 puts "\nУдаление студента по id 4:"
 students_list.delete_student_by_id(4)
-data_list = students_list.get_k_n_student_short_list(0, students_list.get_student_short_count)
+data_list = students_list.get_k_n_student_short_list(1, students_list.get_student_short_count)
 data = data_list.get_data
 
 (0..data.row_count - 1).each do |index|
@@ -90,7 +90,7 @@ end
 
 puts "\nЗамена студента с id 3:"
 students_list.replace_student_by_id(3, test_student)
-data_list = students_list.get_k_n_student_short_list(0, students_list.get_student_short_count)
+data_list = students_list.get_k_n_student_short_list(1, students_list.get_student_short_count)
 data = data_list.get_data
 
 (0..data.row_count - 1).each do |index|

@@ -38,8 +38,10 @@ class Students_list_JSON
 
     # Получение списка k по счету n объектов Student_short в форме Data_list
     def get_k_n_student_short_list(k, n, data_list = nil)
-        raise ArgumentError, 'k и n должны быть неотрицательными числами' unless k.is_a?(Integer) && n.is_a?(Integer) && k >= 0 && n > 0
+        raise ArgumentError, 'k и n должны быть неотрицательными числами' unless k.is_a?(Integer) && n.is_a?(Integer) && k > 0 && n > 0
         
+        start = (k - 1) * n
+
         # Извлекаем нужный диапазон студентов
         selected_students = students[k, n] || []
 
