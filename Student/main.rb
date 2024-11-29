@@ -1,8 +1,9 @@
 require "./models/student/student.rb"
 require "./models/student_short/student_short.rb"
 require "./models/binary_tree/student_binary_tree.rb"
-require "./models/students_list/students_list_json.rb"
-require "./models/students_list/students_list_yaml.rb"
+require "./models/students_list/students_list.rb"
+require "./models/students_list_strategy/students_list_strategy_json.rb"
+require "./models/students_list_strategy/students_list_strategy_yaml.rb"
 require "date"
 
 require "./models/data_list/data_list_student_short.rb"
@@ -55,11 +56,12 @@ table = student_short_list.get_data
     puts "#{table.get_element(index, 0)}, #{table.get_element(index, 1)}, #{table.get_element(index, 2)}, #{table.get_element(index, 3)}"   
 end
 
-students_list = Students_list_JSON.new('students.json')
+json_strategy = Students_list_strategy_JSON.new
+students_list = Students_list.new('./students.json', json_strategy)
 students_list.read
 students_list.sort_by_initials
 
-puts "Отсортированные студенты в students_list (первые 2):"
+puts "\nОтсортированные студенты в students_list (первые 2):"
 data_list = students_list.get_k_n_student_short_list(1, 2)
 data = data_list.get_data
 
@@ -69,7 +71,7 @@ end
 
 test_student = Student.new(surname:"Серый", firstname:"Максим", lastname:"Андреевич", phone_number: "89182297016")
 
-puts "Добавление нового студента:"
+puts "\nДобавление нового студента:"
 students_list.add_student(test_student)
 students_list.sort_by_initials
 
@@ -99,7 +101,8 @@ data = data_list.get_data
 end
 
 puts "\nПроверка Students_list_YAML"
-students_list_yaml = Students_list_YAML.new('students.yaml')
+yaml_strategy = Students_list_strategy_YAML.new
+students_list_yaml = Students_list.new('./students.yaml', yaml_strategy)
 students_list_yaml.add_student(ivan)
 students_list_yaml.add_student(nikita)
 students_list_yaml.add_student(masha)
