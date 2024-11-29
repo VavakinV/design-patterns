@@ -1,9 +1,9 @@
-require "./student.rb"
-require "./student_short.rb"
-require "./student_binary_tree.rb"
+require "./models/student/student.rb"
+require "./models/student_short/student_short.rb"
+require "./models/binary_tree/student_binary_tree.rb"
 require "date"
 
-require "./models/data_list_student_short.rb"
+require "./models/data_list/data_list_student_short.rb"
 
 ivan = Student.new(surname:"Иванов", firstname:"Иван", lastname:"Иванович", id: 1, phone_number: "88005553535", git: "https://github.com/ivan", date_of_birth: Date.parse("16.06.2004"))
 nikita = Student.new(surname:"Козлов", firstname:"Никита", lastname:"Борисович", id: 2, phone_number: "89181112233", telegram: "@Sebas", git: "sebasxc", date_of_birth: Date.parse("09.06.2004"))

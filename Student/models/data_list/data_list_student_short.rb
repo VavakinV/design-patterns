@@ -1,6 +1,6 @@
-require "./models/data_list.rb"
-require "./models/data_table.rb"
-require "./student_short.rb"
+require_relative "./data_list.rb"
+require "./models/data_table/data_table.rb"
+require "./models/student_short/student_short.rb"
 
 class Data_list_student_short < Data_list
     private

@@ -1,4 +1,4 @@
-require "./person.rb"
+require "./models/person/person.rb"
 
 class Student < Person
 	include Comparable
