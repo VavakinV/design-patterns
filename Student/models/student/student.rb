@@ -79,7 +79,6 @@ class Student < Person
 	# Сеттер для Git
 	def git=(val)
 		if self.class.valid_git?(val)
-			puts val
 			@git = val 
 		else
 			raise ArgumentError, "Некорректный git"

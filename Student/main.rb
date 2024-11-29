@@ -2,6 +2,7 @@ require "./models/student/student.rb"
 require "./models/student_short/student_short.rb"
 require "./models/binary_tree/student_binary_tree.rb"
 require "./models/students_list/students_list_json.rb"
+require "./models/students_list/students_list_yaml.rb"
 require "date"
 
 require "./models/data_list/data_list_student_short.rb"
@@ -91,6 +92,21 @@ end
 puts "\nЗамена студента с id 3:"
 students_list.replace_student_by_id(3, test_student)
 data_list = students_list.get_k_n_student_short_list(1, students_list.get_student_short_count)
+data = data_list.get_data
+
+(0..data.row_count - 1).each do |index|
+    puts "#{data.get_element(index, 0)}, #{data.get_element(index, 1)}, #{data.get_element(index, 2)}, #{data.get_element(index, 3)}"   
+end
+
+puts "\nПроверка Students_list_YAML"
+students_list_yaml = Students_list_YAML.new('students.yaml')
+students_list_yaml.add_student(ivan)
+students_list_yaml.add_student(nikita)
+students_list_yaml.add_student(masha)
+students_list_yaml.write
+students_list_yaml.read
+
+data_list = students_list_yaml.get_k_n_student_short_list(1, students_list.get_student_short_count)
 data = data_list.get_data
 
 (0..data.row_count - 1).each do |index|

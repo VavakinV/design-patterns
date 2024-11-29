@@ -1,23 +1,23 @@
-require 'json'
+require 'yaml'
 require_relative '../student/student.rb'
 require_relative '../student_short/student_short.rb'
 require_relative '../data_list/data_list_student_short.rb'
 
-class Students_list_JSON
+class Students_list_YAML
 
     def initialize(file_path)
         self.file_path = file_path
         self.students = []
-        # Если файла не существует, создаётся пустой JSON
+        # Если файла не существует, создаётся пустой YAML
         unless File.exist?(file_path)
-            File.write(file_path, [].to_json)
+            File.write(file_path, [].to_yaml)
         end
     end    
 
     # Чтение из файла
     def read
         content = File.read(file_path)
-        student_hashes = JSON.parse(content, symbolize_names: true)
+        student_hashes = YAML.safe_load(content, symbolize_names: true, permitted_classes: [Date, Symbol])
 
         self.students = student_hashes.map do |student_hash|
             Student.new(**student_hash)
@@ -27,13 +27,14 @@ class Students_list_JSON
     # Запись в файл
     def write
         content = students.map{|student| student.to_h}
-        File.write(file_path, JSON.pretty_generate(content))
+        File.write(file_path, content.to_yaml)
     end    
 
     # Получение студента по ID
     def get_student_by_id(id)
         student = students.find { |student| student.id == id }
         raise "Студент с ID #{id} не найден" if student.nil?
+        student
     end
 
     # Получение списка k по счету n объектов Student_short в форме Data_list
@@ -90,9 +91,9 @@ class Students_list_JSON
     # Количество студентов
     def get_student_short_count
         students.size
-    end
+    end 
 
     private
 
     attr_accessor :file_path, :students
-end    
+end
