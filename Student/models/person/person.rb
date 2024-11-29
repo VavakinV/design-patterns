@@ -55,12 +55,12 @@ class Person
 
 	# Метод валидации Git
 	def self.valid_git?(str)
-		str.nil? || str.match?(/^(?:https:\/\/github\.com\/)?[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/)
+		str.nil? || str.match?(/^(https?:\/\/(www\.)?github\.com\/)?[a-zA-Z0-9-]{1,39}\/?$/)
 	end
 
 	# Метод валидации даты рождения
 	def self.valid_date_of_birth?(str)
-		str.nil? || str.is_a?(Date)
+		str.nil? || str.is_a?(Date) || (str.is_a?(String) && Date.parse(str) rescue false)
 	end
 end
 

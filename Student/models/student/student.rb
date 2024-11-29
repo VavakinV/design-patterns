@@ -56,7 +56,11 @@ class Student < Person
 	# Сеттер для даты рождения
 	def date_of_birth=(val)
 		if self.class.valid_date_of_birth?(val)
-			@date_of_birth = val
+			if val.is_a?(String)
+				@date_of_birth = Date.parse(val)
+			else
+				@date_of_birth = val
+			end
 		else
 			raise ArgumentError, "Некорректная дата рождения"
 		end
@@ -75,6 +79,7 @@ class Student < Person
 	# Сеттер для Git
 	def git=(val)
 		if self.class.valid_git?(val)
+			puts val
 			@git = val 
 		else
 			raise ArgumentError, "Некорректный git"
@@ -93,6 +98,11 @@ class Student < Person
 		(@git ? "\nGit: #{@git}" : "")+\
 		(@date_of_birth ? "\nДата рождения: #{@date_of_birth}" : "")+\
 		"\n------------------"
+	end
+
+	# Переопределение to_h
+	def to_h
+		{id: self.id, surname: self.surname, firstname: self.firstname, lastname: self.lastname, date_of_birth: self.date_of_birth, telegram: self.telegram, email: self.email, phone_number: self.phone_number, git: self.git}
 	end
 	
 	# Проверка наличия хотя бы одного из контактов
