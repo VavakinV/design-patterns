@@ -1,5 +1,6 @@
 require 'dotenv/load'
 require 'pg'
+require './models/student/student.rb'
 
 host = ENV['DB_HOST']
 port = ENV['DB_PORT']
@@ -18,11 +19,11 @@ begin
     )
 
     # Выполнение SELECT запроса
-    result = connection.exec("SELECT * FROM student;") # Замените 'your_table' на имя вашей таблицы
+    result = connection.exec("SELECT * FROM student;")
 
     # Вывод результатов
     result.each do |row|
-        puts row
+        puts Student.new_from_hash(row).initials
     end
 
 ensure

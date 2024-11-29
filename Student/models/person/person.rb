@@ -35,17 +35,17 @@ class Person
 
 	# Метод валидации ФИО
 	def self.valid_name?(str)
-		str.match?(/^[A-ZА-Я][a-zA-Zа-яА-Я\-]{0,49}$/)
+		str.match?(/^[A-ZА-ЯЁ][a-zA-Zа-яёА-Я\-]{0,49}$/)
 	end
 
 	# Метод валидации ID
 	def self.valid_id?(str)
-		str.nil? || str.class == Integer
+		str.nil? || str.is_a?(Integer) || (str.is_a?(String) && str.to_i.to_s == str rescue false)
 	end
 
 	# Метод валидации Telegram
 	def self.valid_telegram?(str)
-		str.nil? || str.match?(/^(?:@|(?:(?:(?:https?:\/\/)?t(?:elegram)?)\.me\/))(\w{4,})$/)
+		str.nil? || str.match?(/^(?:@|(?:(?:(?:https?:\/\/)?t(?:elegram)?)\.me\/))(\w+)$/)
 	end
 
 	# Метод валидации email
