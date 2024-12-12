@@ -34,8 +34,8 @@ class Students_list_db
     def get_k_n_student_short_list(k, n, data_list = nil)
         raise ArgumentError, 'k и n должны быть положительными числами' unless k > 0 && n > 0
 
-        offset = (k - 1) * n
-        result = connection.query("SELECT * FROM student LIMIT $1 OFFSET $2", [n, offset])
+        start = (k - 1) * n
+        result = connection.query("SELECT * FROM student LIMIT $1 OFFSET $2", [n, start])
 
         student_short_list = result.map do |student_data|
             student = Student.new(
@@ -52,7 +52,7 @@ class Students_list_db
             Student_short.new(student: student)
         end
 
-        data_list ||= Data_list_student_short.new(student_short_list)
+        data_list ||= Data_list_student_short.new(student_short_list, start)
         data_list
     end
 

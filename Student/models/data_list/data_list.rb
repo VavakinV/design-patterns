@@ -1,8 +1,9 @@
 class Data_list
 
-    def initialize(data)
+    def initialize(data, offset = 0)
         self.data = data
         self.selected = []
+        self.offset = offset
     end
 
     # Выбор элемента по номеру
@@ -46,9 +47,17 @@ class Data_list
         @data = data
     end
 
+    # Сеттер для смещения (при пагинации)
+    def offset=(offset)
+        unless offset.is_a?(Integer) && offset >= 0
+            raise ArgumentError, 'Offset должен быть неотрицательным числом'
+        end
+        @offset = offset
+    end
+
     private
     
-    attr_reader :data
+    attr_reader :data, :offset
     attr_accessor :selected
 
     # Абстрактный метод получения имен атрибутов

@@ -42,7 +42,7 @@ class Students_list
         # Преобразуем в список Student_short
         student_short_list = selected_students.map { |student| Student_short.new(student: student) }
 
-        data_list ||= Data_list_student_short.new(student_short_list)
+        data_list ||= Data_list_student_short.new(student_short_list, start)
 
         data_list
     end
