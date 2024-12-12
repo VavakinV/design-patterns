@@ -23,13 +23,13 @@
   },
   {
     "id": 3,
-    "surname": "Ульянова",
-    "firstname": "Мария",
-    "lastname": "Сергеевна",
-    "date_of_birth": "2005-03-15",
-    "telegram": "t.me/Flower",
+    "surname": "Серый",
+    "firstname": "Максим",
+    "lastname": "Андреевич",
+    "date_of_birth": null,
+    "telegram": null,
     "email": null,
-    "phone_number": "89889998877",
+    "phone_number": "89182297016",
     "git": null
   }
 ]

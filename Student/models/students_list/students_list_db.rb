@@ -2,9 +2,10 @@ require 'pg'
 require_relative '../student/student.rb'
 require_relative '../student_short/student_short.rb'
 require_relative '../data_list/data_list_student_short.rb'
+require_relative './students_list_interface.rb'
 require './database/db_connection.rb'
 
-class Students_list_db
+class Students_list_db < Students_list_interface
     def initialize(db_config)
         self.connection = DB_connection.instance(db_config)
     end

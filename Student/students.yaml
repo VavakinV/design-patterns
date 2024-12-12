@@ -26,3 +26,192 @@
   :email:
   :phone_number: '89889998877'
   :git:
+- :id: 4
+  :surname: Иванов
+  :firstname: Иван
+  :lastname: Иванович
+  :date_of_birth: 2004-06-16
+  :telegram:
+  :email:
+  :phone_number: '88005553535'
+  :git: https://github.com/ivan
+- :id: 5
+  :surname: Козлов
+  :firstname: Никита
+  :lastname: Борисович
+  :date_of_birth: 2004-06-09
+  :telegram: "@Sebas"
+  :email:
+  :phone_number: '89181112233'
+  :git: sebasxc
+- :id: 6
+  :surname: Ульянова
+  :firstname: Мария
+  :lastname: Сергеевна
+  :date_of_birth: 2005-03-15
+  :telegram: t.me/Flower
+  :email:
+  :phone_number: '89889998877'
+  :git:
+- :id: 7
+  :surname: Иванов
+  :firstname: Иван
+  :lastname: Иванович
+  :date_of_birth: 2004-06-16
+  :telegram:
+  :email:
+  :phone_number: '88005553535'
+  :git: https://github.com/ivan
+- :id: 8
+  :surname: Козлов
+  :firstname: Никита
+  :lastname: Борисович
+  :date_of_birth: 2004-06-09
+  :telegram: "@Sebas"
+  :email:
+  :phone_number: '89181112233'
+  :git: sebasxc
+- :id: 9
+  :surname: Ульянова
+  :firstname: Мария
+  :lastname: Сергеевна
+  :date_of_birth: 2005-03-15
+  :telegram: t.me/Flower
+  :email:
+  :phone_number: '89889998877'
+  :git:
+- :id: 10
+  :surname: Иванов
+  :firstname: Иван
+  :lastname: Иванович
+  :date_of_birth: 2004-06-16
+  :telegram:
+  :email:
+  :phone_number: '88005553535'
+  :git: https://github.com/ivan
+- :id: 11
+  :surname: Козлов
+  :firstname: Никита
+  :lastname: Борисович
+  :date_of_birth: 2004-06-09
+  :telegram: "@Sebas"
+  :email:
+  :phone_number: '89181112233'
+  :git: sebasxc
+- :id: 12
+  :surname: Ульянова
+  :firstname: Мария
+  :lastname: Сергеевна
+  :date_of_birth: 2005-03-15
+  :telegram: t.me/Flower
+  :email:
+  :phone_number: '89889998877'
+  :git:
+- :id: 13
+  :surname: Иванов
+  :firstname: Иван
+  :lastname: Иванович
+  :date_of_birth: 2004-06-16
+  :telegram:
+  :email:
+  :phone_number: '88005553535'
+  :git: https://github.com/ivan
+- :id: 14
+  :surname: Козлов
+  :firstname: Никита
+  :lastname: Борисович
+  :date_of_birth: 2004-06-09
+  :telegram: "@Sebas"
+  :email:
+  :phone_number: '89181112233'
+  :git: sebasxc
+- :id: 15
+  :surname: Ульянова
+  :firstname: Мария
+  :lastname: Сергеевна
+  :date_of_birth: 2005-03-15
+  :telegram: t.me/Flower
+  :email:
+  :phone_number: '89889998877'
+  :git:
+- :id: 16
+  :surname: Иванов
+  :firstname: Иван
+  :lastname: Иванович
+  :date_of_birth: 2004-06-16
+  :telegram:
+  :email:
+  :phone_number: '88005553535'
+  :git: https://github.com/ivan
+- :id: 17
+  :surname: Козлов
+  :firstname: Никита
+  :lastname: Борисович
+  :date_of_birth: 2004-06-09
+  :telegram: "@Sebas"
+  :email:
+  :phone_number: '89181112233'
+  :git: sebasxc
+- :id: 18
+  :surname: Ульянова
+  :firstname: Мария
+  :lastname: Сергеевна
+  :date_of_birth: 2005-03-15
+  :telegram: t.me/Flower
+  :email:
+  :phone_number: '89889998877'
+  :git:
+- :id: 19
+  :surname: Иванов
+  :firstname: Иван
+  :lastname: Иванович
+  :date_of_birth: 2004-06-16
+  :telegram:
+  :email:
+  :phone_number: '88005553535'
+  :git: https://github.com/ivan
+- :id: 20
+  :surname: Козлов
+  :firstname: Никита
+  :lastname: Борисович
+  :date_of_birth: 2004-06-09
+  :telegram: "@Sebas"
+  :email:
+  :phone_number: '89181112233'
+  :git: sebasxc
+- :id: 21
+  :surname: Ульянова
+  :firstname: Мария
+  :lastname: Сергеевна
+  :date_of_birth: 2005-03-15
+  :telegram: t.me/Flower
+  :email:
+  :phone_number: '89889998877'
+  :git:
+- :id: 22
+  :surname: Иванов
+  :firstname: Иван
+  :lastname: Иванович
+  :date_of_birth: 2004-06-16
+  :telegram:
+  :email:
+  :phone_number: '88005553535'
+  :git: https://github.com/ivan
+- :id: 23
+  :surname: Козлов
+  :firstname: Никита
+  :lastname: Борисович
+  :date_of_birth: 2004-06-09
+  :telegram: "@Sebas"
+  :email:
+  :phone_number: '89181112233'
+  :git: sebasxc
+- :id: 24
+  :surname: Ульянова
+  :firstname: Мария
+  :lastname: Сергеевна
+  :date_of_birth: 2005-03-15
+  :telegram: t.me/Flower
+  :email:
+  :phone_number: '89889998877'
+  :git:

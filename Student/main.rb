@@ -4,6 +4,7 @@ require "./models/binary_tree/student_binary_tree.rb"
 require "./models/students_list/students_list.rb"
 require "./models/students_list_strategy/students_list_strategy_json.rb"
 require "./models/students_list_strategy/students_list_strategy_yaml.rb"
+require "./models/students_list/students_list_file.rb"
 require "date"
 
 require "./models/data_list/data_list_student_short.rb"
@@ -57,9 +58,8 @@ table = student_short_list.get_data
 end
 
 json_strategy = Students_list_strategy_JSON.new
-students_list = Students_list.new('./students.json', json_strategy)
-students_list.read
-students_list.sort_by_initials
+json_adapter = Students_list_file.new('./students.json', json_strategy)
+students_list = Students_list.new(json_adapter)
 
 puts "\nОтсортированные студенты в students_list (вторая страница, 2 на одной странице):"
 data_list = students_list.get_k_n_student_short_list(2, 2)
@@ -73,7 +73,7 @@ test_student = Student.new(surname:"Серый", firstname:"Максим", lastn
 
 puts "\nДобавление нового студента:"
 students_list.add_student(test_student)
-students_list.sort_by_initials
+json_adapter.sort_by_initials
 
 data_list = students_list.get_k_n_student_short_list(1, students_list.get_student_short_count)
 data = data_list.get_data
@@ -102,12 +102,11 @@ end
 
 puts "\nПроверка Students_list_YAML"
 yaml_strategy = Students_list_strategy_YAML.new
-students_list_yaml = Students_list.new('./students.yaml', yaml_strategy)
+yaml_adapter = Students_list_file.new('./students.yaml', yaml_strategy)
+students_list_yaml = Students_list.new(yaml_adapter)
 students_list_yaml.add_student(ivan)
 students_list_yaml.add_student(nikita)
 students_list_yaml.add_student(masha)
-students_list_yaml.write
-students_list_yaml.read
 
 data_list = students_list_yaml.get_k_n_student_short_list(1, students_list.get_student_short_count)
 data = data_list.get_data
