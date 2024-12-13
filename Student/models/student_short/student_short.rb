@@ -1,4 +1,4 @@
-require "./models/person/person.rb"
+require_relative "../person/person.rb"
 
 class Student_short < Person
 	attr_reader :initials, :contacts

@@ -16,7 +16,7 @@ class Data_table
 
     # Количество столбцов
     def column_count
-        self.data.empty ? 0 : self.data[0].size
+        self.data.empty? ? 0 : self.data[0].size
     end
 
     private
