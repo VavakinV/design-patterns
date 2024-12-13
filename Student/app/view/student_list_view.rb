@@ -14,7 +14,7 @@ class StudentListView < FXMainWindow
         self.filters = {}
         self.students_list = students_list
         self.current_page = 1
-        self.items_per_page = 20
+        self.items_per_page = 21
 
         # Главный контейнер
         main_frame = FXHorizontalFrame.new(self, LAYOUT_FILL_X | LAYOUT_FILL_Y)

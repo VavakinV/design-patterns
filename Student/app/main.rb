@@ -1,5 +1,5 @@
 require 'fox16'
-require "../app/student_list_view.rb"
+require "../app/view/student_list_view.rb"
 include Fox
 
 app = FXApp.new

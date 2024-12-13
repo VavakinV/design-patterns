@@ -1,5 +1,5 @@
 require_relative "./student_binary_tree_node.rb"
-require "./models/student/student.rb"
+require_relative "../student/student.rb"
 
 class Student_binary_tree
 	include Enumerable

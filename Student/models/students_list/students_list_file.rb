@@ -4,6 +4,7 @@ require_relative '../student/student.rb'
 require_relative '../student_short/student_short.rb'
 require_relative '../data_list/data_list_student_short.rb'
 require_relative './students_list_interface.rb'
+require_relative '../binary_tree/student_binary_tree.rb'
 
 class Students_list_file < Students_list_interface
     def initialize(file_path, strategy)
@@ -14,16 +15,6 @@ class Students_list_file < Students_list_interface
         create_empty_file_if_not_exists
         read
     end
-
-    # Чтение из файла
-    def read
-        self.students = strategy.read(file_path)
-    end    
-
-    # Запись в файл
-    def write
-        strategy.write(file_path, students)
-    end  
     
     # Получение студента по ID
     def get_student_by_id(id)
@@ -56,6 +47,11 @@ class Students_list_file < Students_list_interface
 
     # Добавление нового студента
     def add_student(student)
+        begin
+            check_unique_fields(email: student.email, telegram: student.telegram, phone_number: student.phone_number, git: student.git)
+        rescue => e
+            raise e
+        end
         # Генерация нового ID
         new_id = students.empty? ? 1 : students.max_by(&:id).id + 1 
         student.id = new_id
@@ -95,6 +91,16 @@ class Students_list_file < Students_list_interface
 
     attr_accessor :file_path, :students, :strategy
 
+    # Чтение из файла
+    def read
+        self.students = strategy.read(file_path)
+    end    
+
+    # Запись в файл
+    def write
+        strategy.write(file_path, students)
+    end  
+
     def create_empty_file_if_not_exists
         # Если файл не существует, создаём пустой файл
         unless File.exist?(file_path)
@@ -105,4 +111,47 @@ class Students_list_file < Students_list_interface
     def empty_content
         strategy.empty_content
     end  
+
+    def check_unique_fields(email: nil, telegram: nil, phone_number: nil, git: nil, current_student: nil)
+        if !email.nil? && (current_student.nil? || email != current_student.email) && !unique_email?(email)
+            raise 'Повторяющийся email'
+        end
+
+        if !telegram.nil? && (current_student.nil? || telegram != current_student.telegram) && !unique_telegram?(telegram)
+            raise 'Повторяющийся telegram'
+        end
+
+        if !phone_number.nil? && (current_student.nil? || phone_number != current_student.phone_number) && !unique_phone_number?(phone_number)
+            raise 'Повторяющийся номер телефона'
+        end
+
+        if !git.nil? && (current_student.nil? || git != current_student.git) && !unique_git?(git)
+            raise 'Повторяющийся git'
+        end
+    end
+
+    def unique_email?(email)
+        unique?(:email, email)
+    end
+
+    def unique_telegram?(telegram)
+        unique?(:telegram, telegram)
+    end
+
+    def unique_phone_number?(phone_number)
+        unique?(:phone_number, phone_number)
+    end
+
+    def unique_git?(git)
+        unique?(:git, git)
+    end
+
+    def unique?(type, key)
+        tree = Student_binary_tree.new
+        self.students.each do |student|
+            tree.insert(student)
+        end
+
+        tree.find{|student| student.element.send(type) == key}.nil?
+    end
 end
