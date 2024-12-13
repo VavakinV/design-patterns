@@ -80,11 +80,20 @@ class StudentListView < FXMainWindow
         self.table = FXTable.new(parent, opts: LAYOUT_FILL_X | LAYOUT_FILL_Y | TABLE_READONLY | TABLE_COL_SIZABLE)
         self.table.setTableSize(self.items_per_page, 3)
         self.table.defColumnWidth = 180
-        self.table.rowHeaderWidth = 30
+        self.table.rowHeaderWidth = 0
+        self.table.columnHeaderHeight = 0
 
-        self.table.columnHeader.connect(SEL_COMMAND) do |_, _, col|
-            sort_table_by_column(col)
-            update_table
+        self.table.connect(SEL_COMMAND) do |_, _, pos|
+            if pos.row == 0
+                sort_table_by_column(pos.col)
+                update_table
+            end
+
+            if pos.col == 0
+                self.table.selectRow(pos.row)
+            end
+            
+            update_buttons_state
         end
 
         # Навигация по страницам
@@ -99,10 +108,44 @@ class StudentListView < FXMainWindow
 
     def setup_control_area(parent)
         FXLabel.new(parent, "УПРАВЛЕНИЕ", opts: LAYOUT_FILL_X)
-        FXButton.new(parent, "Добавить", opts: BUTTON_NORMAL | LAYOUT_FILL_X)
-        FXButton.new(parent, "Удалить", opts: BUTTON_NORMAL | LAYOUT_FILL_X)
-        FXButton.new(parent, "Изменить", opts: BUTTON_NORMAL | LAYOUT_FILL_X)
-        FXButton.new(parent, "Обновить", opts: BUTTON_NORMAL | LAYOUT_FILL_X)
+
+        # Кнопка "Добавить" - доступна всегда
+        add_button = FXButton.new(parent, "Добавить", opts: BUTTON_NORMAL | LAYOUT_FILL_X)
+        add_button.connect(SEL_COMMAND) do
+            create_entry
+        end
+
+        # Кнопка "Удалить" - доступна только если выделена хотя бы одна строка
+        self.delete_button = FXButton.new(parent, "Удалить", opts: BUTTON_NORMAL | LAYOUT_FILL_X)
+        delete_button.connect(SEL_COMMAND) do
+            delete_entries
+        end
+
+        # Кнопка "Изменить" - доступна только если выделена одна строка
+        self.edit_button = FXButton.new(parent, "Изменить", opts: BUTTON_NORMAL | LAYOUT_FILL_X)
+        edit_button.connect(SEL_COMMAND) do
+            update_entry
+        end
+
+        # Кнопка "Обновить" - доступна всегда
+        refresh_button = FXButton.new(parent, "Обновить", opts: BUTTON_NORMAL | LAYOUT_FILL_X)
+        refresh_button.connect(SEL_COMMAND) do
+            update_table
+        end
+
+        # Обновляем доступность кнопок при изменении выделения в таблице
+        self.table.connect(SEL_CHANGED) do
+            update_buttons_state
+        end
+
+        # Инициализация состояния кнопок
+        update_buttons_state
+    end
+    
+    def update_buttons_state
+        selected_rows = (0...self.table.numRows).select { |row| self.table.rowSelected?(row) }
+        self.delete_button.enabled = !selected_rows.empty?
+        self.edit_button.enabled = (selected_rows.size == 1)
     end
 
     def update_table
@@ -179,7 +222,7 @@ class StudentListView < FXMainWindow
     end
 
     private
-    attr_accessor :filters, :students_list, :current_page, :items_per_page, :table, :prev_button, :next_button, :page_label, :sort_order, :data
+    attr_accessor :filters, :students_list, :current_page, :items_per_page, :table, :prev_button, :next_button, :page_label, :sort_order, :data, :selected_rows, :edit_button, :delete_button
 
     def reset_filters
         self.filters.each do |key, field|
@@ -188,5 +231,25 @@ class StudentListView < FXMainWindow
             field[:text_field].visible = false if key != 'name'
         end
         update_table
+    end
+
+    def create_entry
+        # Логика добавления записи
+    end
+    
+    def update_entry
+        self.selected_rows = []
+        (0...self.table.numRows).each do |row_idx|
+            self.selected_rows << row_idx if self.table.rowSelected?(row_idx)
+        end
+        puts "Изменение строки с номером: #{self.selected_rows.first}"
+    end
+
+    def delete_entries
+        self.selected_rows = []
+        (0...self.table.numRows).each do |row_idx|
+            self.selected_rows << row_idx if self.table.rowSelected?(row_idx)
+        end
+        puts "Удаление строк с номерами: #{self.selected_rows}"
     end
 end
