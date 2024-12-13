@@ -3,10 +3,11 @@ require 'yaml'
 require_relative '../student/student.rb'
 require_relative '../student_short/student_short.rb'
 require_relative '../data_list/data_list_student_short.rb'
-require_relative './students_list_interface.rb'
 require_relative '../binary_tree/student_binary_tree.rb'
+require_relative '../students_list_strategy/students_list_strategy_json.rb'
+require_relative '../students_list_strategy/students_list_strategy_yaml.rb'
 
-class Students_list_file < Students_list_interface
+class Students_list_file
     def initialize(file_path, strategy)
         self.file_path = file_path
         self.students = []
@@ -16,6 +17,16 @@ class Students_list_file < Students_list_interface
         read
     end
     
+    # Чтение из файла
+    def read
+        self.students = strategy.read(file_path)
+    end    
+
+    # Запись в файл
+    def write
+        strategy.write(file_path, students)
+    end  
+
     # Получение студента по ID
     def get_student_by_id(id)
         student = students.find { |student| student.id == id }
@@ -80,6 +91,7 @@ class Students_list_file < Students_list_interface
         # Удаление студента
         students.delete_at(student_index)
         write
+        write
     end
 
     # Количество студентов
@@ -90,16 +102,6 @@ class Students_list_file < Students_list_interface
     private
 
     attr_accessor :file_path, :students, :strategy
-
-    # Чтение из файла
-    def read
-        self.students = strategy.read(file_path)
-    end    
-
-    # Запись в файл
-    def write
-        strategy.write(file_path, students)
-    end  
 
     def create_empty_file_if_not_exists
         # Если файл не существует, создаём пустой файл

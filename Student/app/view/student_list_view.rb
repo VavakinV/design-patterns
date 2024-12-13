@@ -1,9 +1,4 @@
 require 'fox16'
-require '../models/students_list/students_list_db.rb'
-require '../models/students_list/students_list_file.rb'
-require '../models/students_list/students_list.rb'
-require '../models/students_list_strategy/students_list_strategy_json.rb'
-require '../models/students_list_strategy/students_list_strategy_yaml.rb'
 include Fox
 
 class StudentListView < FXMainWindow
