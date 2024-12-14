@@ -1,4 +1,5 @@
 require 'fox16'
+require_relative '../controller/student_list_controller.rb'
 include Fox
 
 class StudentListView < FXMainWindow
@@ -6,6 +7,7 @@ class StudentListView < FXMainWindow
     def initialize(app, students_list)
         super(app, "Student List", width: 1080, height: 505)
 
+        self.controller = Student_list_controller.new(self, students_list)
         self.filters = {}
         self.students_list = students_list
         self.current_page = 1
@@ -151,14 +153,18 @@ class StudentListView < FXMainWindow
         # Рассчитываем индекс начала и конца для текущей страницы
         start_idx = (self.current_page - 1) * self.items_per_page
         end_idx = [start_idx + self.items_per_page - 1, self.data.row_count - 1].min
-      
+        
+        headers = (0...data.column_count).map {|col_idx| data.get_element(0, col_idx)}
+
         # Формируем подмассив данных для текущей страницы
-        data_for_page = (start_idx..end_idx).map do |row_idx|
+        data_for_page = (start_idx+1..end_idx).map do |row_idx|
             (0...self.data.column_count).map do |col_idx|
                 self.data.get_element(row_idx, col_idx)
             end
         end
-      
+        
+        data_for_page = [headers] + data_for_page
+
         # Обновляем таблицу
         row_count = data_for_page.length
         column_count = self.data.column_count
@@ -176,7 +182,7 @@ class StudentListView < FXMainWindow
 
     def change_page(offset)
         new_page = self.current_page + offset
-        total_pages = (self.students_list.get_student_short_count.to_f / self.items_per_page).ceil
+        total_pages = (self.data.row_count.to_f / self.items_per_page).ceil
         return if new_page < 1 || new_page > total_pages
 
         self.current_page = new_page
@@ -184,31 +190,12 @@ class StudentListView < FXMainWindow
     end
 
     def load_data
-        self.data = self.students_list.get_k_n_student_short_list(1, self.students_list.get_student_short_count).get_data
+        self.data = self.controller.refresh_data
     end
 
     def sort_table_by_column(col_idx=0)
         return if self.data.nil? || self.data.row_count <= 1
-
-        headers = (0...self.data.column_count).map {|col_idx| self.data.get_element(0, col_idx)}
-
-        rows = (1...self.data.row_count).map do |row_idx|
-            (0...self.data.column_count).map {|column_idx| self.data.get_element(row_idx, column_idx)}
-        end
-
-        self.sort_order ||= {}
-        self.sort_order[col_idx] = !sort_order.fetch(col_idx, false)
-
-        sorted_rows = rows.sort_by do |row| 
-            value = row[col_idx]
-            value.nil? ? "\xFF" * 1000 : value
-        end
-
-        sorted_rows.reverse! unless self.sort_order[col_idx]
-
-        all_data = [headers] + sorted_rows
-
-        self.data = Data_table.new(all_data)
+        self.data, self.sort_order = self.controller.sort_table_by_column(self.data, self.sort_order, col_idx)
     end
 
     def create
@@ -217,7 +204,7 @@ class StudentListView < FXMainWindow
     end
 
     private
-    attr_accessor :filters, :students_list, :current_page, :items_per_page, :table, :prev_button, :next_button, :page_label, :sort_order, :data, :selected_rows, :edit_button, :delete_button
+    attr_accessor :filters, :students_list, :current_page, :items_per_page, :table, :prev_button, :next_button, :page_label, :sort_order, :data, :selected_rows, :edit_button, :delete_button, :controller
 
     def reset_filters
         self.filters.each do |key, field|
@@ -229,7 +216,7 @@ class StudentListView < FXMainWindow
     end
 
     def create_entry
-        # Логика добавления записи
+        self.controller.create
     end
     
     def update_entry
@@ -237,7 +224,7 @@ class StudentListView < FXMainWindow
         (0...self.table.numRows).each do |row_idx|
             self.selected_rows << row_idx if self.table.rowSelected?(row_idx)
         end
-        puts "Изменение строки с номером: #{self.selected_rows.first}"
+        self.controller.update(self.selected_rows.first)
     end
 
     def delete_entries
@@ -245,6 +232,6 @@ class StudentListView < FXMainWindow
         (0...self.table.numRows).each do |row_idx|
             self.selected_rows << row_idx if self.table.rowSelected?(row_idx)
         end
-        puts "Удаление строк с номерами: #{self.selected_rows}"
+        self.controller.delete(self.selected_rows)
     end
 end

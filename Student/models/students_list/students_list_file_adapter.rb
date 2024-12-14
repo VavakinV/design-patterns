@@ -19,16 +19,19 @@ class Students_list_file_adapter < Students_list_interface
     # Добавление нового студента
     def add_student(student)
         self.adaptee.add_student(student)
+        self.adaptee.write
     end
 
     # Замена студента по ID
     def replace_student_by_id(id, new_student)
         self.adaptee.replace_student_by_id(id, new_student)
+        self.adaptee.write
     end
 
     # Удаление студента по ID
     def delete_student_by_id(id)
         self.adaptee.delete_student_by_id(id)
+        self.adaptee.write
     end
     
     # Получить количество элементов

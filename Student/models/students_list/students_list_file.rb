@@ -67,7 +67,6 @@ class Students_list_file
         new_id = students.empty? ? 1 : students.max_by(&:id).id + 1 
         student.id = new_id
         self.students << student
-        write
     end
 
     # Замена студента по ID
@@ -79,7 +78,6 @@ class Students_list_file
         # Замена студента
         students[student_index] = new_student
         new_student.id = id
-        write
     end
 
     # Удаление студента по ID
@@ -90,8 +88,6 @@ class Students_list_file
         end
         # Удаление студента
         students.delete_at(student_index)
-        write
-        write
     end
 
     # Количество студентов
