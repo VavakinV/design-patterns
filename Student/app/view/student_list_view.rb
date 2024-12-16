@@ -27,6 +27,8 @@ class StudentListView < FXMainWindow
         # Область управления
         control_frame = FXVerticalFrame.new(main_frame, LAYOUT_FIX_WIDTH, width: 150, padding: 10)
         setup_control_area(control_frame)
+
+        refresh_data
     end
 
     def setup_filter_area(parent)
